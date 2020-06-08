@@ -18,6 +18,10 @@
     TCanvas *c3 = new TCanvas("c3","Tree canvas", 800, 600);
     mytree->Draw("(px**2 + py**2 + pz**2)**(1/2)",*ebeam_l || *ebeam_h);
     c3->SaveAs("Ex4_histo_both.pdf");
+    
+    
+    
+    
 
     
     
