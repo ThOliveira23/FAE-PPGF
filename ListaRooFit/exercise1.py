@@ -28,9 +28,9 @@ expo_pdf = RooExponential("expo_pdf","Exponential Distribution",y,c)
 BW_pdf = RooBreitWigner("BW_pdf","Breit-Wigner Distribution",z,mean,gamma)
 
 # Declaring the frames
-plg = x.frame()
-ple = y.frame()
-plb = z.frame()
+plg = x.frame(RooFit.Title("Gaussian Distribution"))
+ple = y.frame(RooFit.Title("Exponential Distribution"))
+plb = z.frame(RooFit.Title("Breit-Wigner Distribution"))
 
 # Ploting the pdf
 gauss_pdf.plotOn(plg)
