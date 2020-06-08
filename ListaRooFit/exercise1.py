@@ -11,7 +11,7 @@ w = RooWorkspace("w")
 x = RooRealVar("x","x",-5.,5.)
 mu = RooRealVar("mu","mu",0,-10.,10.)
 sigma = RooRealVar("sigma","sigma",1,0,1000)
-#N = RooRealVar("N","N",100,0,10000)
+N = RooRealVar("N","N",100,0,10000)
 
 # Variables for the Exponential
 y = RooRealVar("y","y",0.,10.)
@@ -61,21 +61,21 @@ BW_fit = BW_pdf.fitTo(data_BW,RooFit.Minimizer("Minuit2","Migrad"),RooFit.FitOpt
 # Gauss
 cgauss = TCanvas()
 gauss_pdf.plotOn(plg)
-gauss_pdf.paramOn(plg)
+gauss_pdf.paramOn(plg,RooFit.Layout(0.6,0.9,0.9))
 plg.Draw()
 cgauss.SaveAs("cgauss.pdf")
 
 # Exponential
 cexpo = TCanvas()
 expo_pdf.plotOn(ple)
-expo_pdf.paramOn(ple)
+expo_pdf.paramOn(ple,RooFit.Layout(0.6,0.9,0.9))
 ple.Draw()
 cexpo.SaveAs("cexpo.pdf")
 
 # Breit-Wigner
 cBW = TCanvas()
 BW_pdf.plotOn(plb)
-BW_pdf.paramOn(plb)
+BW_pdf.paramOn(plb,RooFit.Layout(0.6,0.9,0.9))
 plb.Draw()
 cBW.SaveAs("cBW.pdf")
 

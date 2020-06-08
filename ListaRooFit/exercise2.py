@@ -86,7 +86,7 @@ total_PDF.plotOn(frame, RooFit.Components("background_PDF"), RooFit.LineStyle(kD
 #Draw the results
 c = TCanvas()
 frame.Draw()
-c.SaveAs("exercise0.png")
+c.SaveAs("exercise2.png")
 
 #Now save the data and the PDF into a Workspace, for later use for statistical analysis
 w = RooWorkspace("w")
