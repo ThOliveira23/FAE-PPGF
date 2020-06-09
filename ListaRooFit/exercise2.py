@@ -11,7 +11,7 @@ data = inputFile.Get("data")
 
 #The observable using RooRealVar
 #RooRealVar (const char *name, const char *title, Double_t value, Double_t minValue, Double_t maxValue, const char *unit="")
-mass = RooRealVar("mass","#mu^{+}#mu^{-} invariant mass",2.,6.,"GeV")
+mass = RooRealVar("mass","Invariant mass",2.,6.,"GeV")
 
 
 # We will parametrize the JPsi using a Crystal Ball function, composed by: mean, sigma and alpha
@@ -58,7 +58,7 @@ total_PDF = RooAddPdf("total_PDF","The total PDF",RooArgList(JPsi_CB,Psi2S_CB,ba
 total_PDF.fitTo(data, RooFit.Extended(1))
 
 #Now plot the data and the fit result
-frame = mass.frame()
+frame = mass.frame(RooFit.Title("J/#Psi and #Psi(2S) invariant mass"))
 data.plotOn(frame)
 total_PDF.plotOn(frame)
 
