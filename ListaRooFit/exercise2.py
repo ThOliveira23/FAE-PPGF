@@ -45,35 +45,17 @@ a2 = RooRealVar("a2","a2",-0.03,-2.,2.)
 #background_PDF = RooChebychev("background_PDF","The PDF for background",mass,RooArgList(a0,a1,a2))
 background_PDF = RooPolynomial("background_PDF","The PDF for background",mass,RooArgList(a0,a1,a2))
 
-# Defining the number of signal (JPsi) and background events
+# Defining the number of signal (JPsi,Psi2S) and background events
 JPsi_N = RooRealVar("JPsi_N","The number of Jpsi signal events",1500.,0.1,10000.)
+Psi2S_N = RooRealVar("Psi2S_N","The number of Psi2S signal events",1500.,0.1,10000.)
 background_N = RooRealVar("background_N","The number of background events",5000.,0.1,50000.)
 
-#Now define the number of psi(2S) events as a product of crss section*efficiency*luminosity
-Psi2S_eff = RooRealVar("Psi2S_eff","The efficiency for Psi2S",0.75,0.00001,1.)
-Psi2S_lumi  = RooRealVar("Psi2S_lumi","Psi2S_lumi",0.64,0.00001,50.)
-Psi2S_xsec = RooRealVar("Psi2S_xsec","The Psi2S cross section value",3.,0.,40.)
-
-# The number of Psi2S events
-Psi2S_N = RooFormulaVar("Psi2S_N","@0*@1*@2",RooArgList(Psi2S_eff,Psi2S_lumi,Psi2S_xsec))
-
-# Since it is not possilble to fit more than one variable simultaneously, two of the parameters needs to be fixed
-Psi2S_eff.setConstant(1)
-Psi2S_lumi.setConstant(1)
 
 # In order to construct the total PDF
 total_PDF = RooAddPdf("total_PDF","The total PDF",RooArgList(JPsi_CB,Psi2S_CB,background_PDF),RooArgList(JPsi_N,Psi2S_N,background_N))
 
 # To do the fit
 total_PDF.fitTo(data, RooFit.Extended(1))
-
-#Print values of the parameters 
-print "##############"
-Psi2S_mean.Print()
-JPsi_N.Print()
-Psi2S_N.Print()
-background_N.Print()
-print "##############"
 
 #Now plot the data and the fit result
 frame = mass.frame()
@@ -88,12 +70,4 @@ c = TCanvas()
 frame.Draw()
 c.SaveAs("exercise2.png")
 
-#Now save the data and the PDF into a Workspace, for later use for statistical analysis
-w = RooWorkspace("w")
-getattr(w,'import')(data)
-getattr(w,'import')(total_PDF)
 
-OutputFile = TFile("Workspace_mumufit.root","RECREATE")
-w.Write()
-OutputFile.Write()
-OutputFile.Close()
