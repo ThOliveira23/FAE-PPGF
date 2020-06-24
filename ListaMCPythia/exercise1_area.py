@@ -20,7 +20,7 @@ for i in range(N):
     # Since the length of the square is 2, the range of x and y possible values is -1 to 1
     rand_x = random.uniform(-1,1)
     rand_y = random.uniform(-1,1)
-    #print (rand_x,rand_y)
+    print (rand_x,rand_y)
     
     # Distance between (x.y) from the origin
     dist = math.sqrt(rand_x*rand_x + rand_y*rand_y)
@@ -31,7 +31,7 @@ for i in range(N):
     square_hits += 1
     
 # Since the distance from origin can be measured in 4 different quadrants.
-area = 4*circle_hits/square_hits
+area = 4*circle_hits/N
     
 #area = square_points*math.pow(circle_points,-1)
 print area

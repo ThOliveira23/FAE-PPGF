@@ -7,8 +7,6 @@ int main()  {
     Pythia pythia;
     pythia.readString("Beams:eCM = 8000.");
     pythia.readString("Higgs:useBSM = on");         // Allow BSM
-    //pythia.readString("HiggsBSM:all = on");
-    //pythia.readString("HiggsBSM:allA3 = on");
     pythia.readString("HiggsBSM:gg2A3 = on");       // Scattering gg → A^0(A_3^0) via loop contributions primarily from top
     pythia.readString("HiggsA3:parity = 2");        // A as a pure pseudoscalar with CP-odd
     pythia.readString("35:m0 = 300");              // mass
