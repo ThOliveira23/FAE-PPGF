@@ -1,0 +1,27 @@
+Results for Z mass WITHOUT the pt cut (pt1 < 10 or pt2 < 10)
+
+NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE
+ 1  p0           7.22205e+02   7.12582e+00  -2.50098e-02   4.76091e-05
+ 2  p1           9.07523e+01   1.80969e-02   4.93288e-05  -2.89477e-02   (Z mass)
+ 3  p2           2.14765e+00   2.05026e-02   5.83819e-05   4.76552e-02   (Z mass width)
+ 4  p3           7.04207e+01   1.48871e+00  -5.89580e-03   2.73956e-05
+ 5  p4           0.00000e+00   1.41421e+00  -0.00000e+00   0.00000e+00
+ 
+ 
+
+ FitResults: Resonance mass: 90.752 +/- 0.018 GeV/c^2.
+     
+     
+     
+Results for Z mass WITH the pt cuts (pt1 < 10 or pt2 < 10)
+
+
+NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE
+ 1  p0           7.19593e+02   5.38201e+00   5.41174e-02  -5.25093e-06
+ 2  p1           9.07552e+01   1.77852e-02   1.78835e-04  -2.55240e-03   (Z mass)
+ 3  p2           2.15002e+00   1.27402e-02   1.28106e-04   4.07391e-02   (Z mass width)
+ 4  p3           6.84609e+01   1.13366e+00   1.13992e-02  -9.84864e-05
+ 5  p4           0.00000e+00   2.00000e+00  -0.00000e+00   0.00000e+00
+ 
+ 
+ FitResults: Resonance mass: 90.755 +/- 0.018 GeV/c^2.
