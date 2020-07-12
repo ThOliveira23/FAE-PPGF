@@ -1,0 +1,4 @@
+The values and the uncertainties from the optimization
+
+('The value of the decay width (gamma) + 3.8335549421 +- 0.0886042708009', 'The value of the maximum of the distribution (M) = 90.8312869044 +- 0.0349110300681', 'a = -0.50666156918 +- 0.0446894446707', 'b = 52.0044756992 +- 4.5197673548', 'A = 3960.2034057 +- 63.4514922753')
+The lifetime of the Z boson is given by tau = 1.71697030548e-25 +- 3.96840280632e-27

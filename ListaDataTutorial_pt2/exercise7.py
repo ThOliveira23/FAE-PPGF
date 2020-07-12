@@ -9,22 +9,29 @@ import math
 dataset = pd.read_csv("../Data/Zmumu_Run2011A_masses.csv")
 
 mass = dataset['M']
+E1 = dataset['E1']
+E2 = dataset['E2']
+E = (dataset['E1']**2 + dataset['E2']**2)**0.5
+#print E
 
 # Let's limit thw fit near to the peak of the histogram
-lowerlimit = 70
-upperlimit = 110
+min = 70
+max = 110
 bins = 100
 
 # Let's select the invariant mass values that are inside the limitations
-limitedmasses = mass[(mass > lowerlimit) & (mass < upperlimit)]
+limitedmasses = mass[(mass > min) & (mass < max)]
 
 # Let's create a histogram of the selected values
-histo = plt.hist(limitedmasses, bins=bins, range=(lowerlimit,upperlimit))
+h = plt.hist(limitedmasses, bins=bins, range=(min,max))
 
 # In y-axis the number of the events per each bin (can be got from the variable histogram)
-y = histo[0]
-# In x-axis the centers of the bins
-x = 0.5*(histo[1][0:-1] + histo[1][1:])
+y = h[0]
+#print ('y = ',y)
+# In x-axis the center value of the bins
+x = 0.5*(h[1][0:-1] + h[1][1:])
+#print ('x = ',x)
+#print dataset.head()
 
 # Let's define a function that describes Breit-Wigner distribution for the fit.
 # E is the energy, gamma is the decay width, M the maximum of the distribution and a, b and A different parameters that are used for noticing the effect of the background events for the fit
@@ -32,7 +39,6 @@ x = 0.5*(histo[1][0:-1] + histo[1][1:])
 def breitwigner(E,gamma,M,a,b,A):
     return a*E+b+A*( (2*np.sqrt(2)*M*gamma*np.sqrt(M**2*(M**2+gamma**2)))/(np.pi*np.sqrt(M**2+np.sqrt(M**2*(M**2+gamma**2)))) )/((E**2-M**2)**2+M**2*gamma**2)
     
-
 # Initial values for the optimization in the following order
 # gamma (the full width at half maximum (FWHM) of the distribution)
 # M (the maximum of the distribution)
@@ -40,14 +46,16 @@ def breitwigner(E,gamma,M,a,b,A):
 # b (the y intercept that is used for noticing the effect of the background)
 # A (the "height" of the Breit-Wigner distribution)
 
-#BEST
-initials = [6, 91, -2, 200, 13000]
+#parameters = [gamma, M, a, b, A]
+parameters = [6, 91, -2, 200, 13000]
 
 
 # Let's import the module that is used in the optimization.
 # Run the optimization and calculate the uncertainties of the optimized parameters
 from scipy.optimize import curve_fit
-best, covariance = curve_fit(breitwigner, x, y, p0=initials, sigma=np.sqrt(y))
+#From https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html
+#scipy.optimize.curve_fit(f, xdata, ydata, p0=None, sigma=None, absolute_sigma=False, check_finite=True, bounds=- inf, inf, method=None, jac=None, **kwargs)[source]
+best, covariance = curve_fit(breitwigner, x, y, p0=parameters, sigma=np.sqrt(y))
 error = np.sqrt(np.diag(covariance))
 
 # Let's print the values and uncertainties that are got from the optimization
