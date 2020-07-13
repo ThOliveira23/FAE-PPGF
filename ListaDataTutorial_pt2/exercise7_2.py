@@ -1,3 +1,19 @@
+'''Question 4 - Write a function that represents Breit-Wigner distribution to the values of the histogram.
+
+To get information about mass and lifetime of the detected resonance, a function that describes the distribution of the invariant masses must be fitted to the values of the histogram. In our case the values follow a Breit-Wigner distribution:
+
+where E is the energy, M is the maximum of the distribution (equals to the mass of the particle that is detected in the resonance), Gamma the full width at half maximum (FWHM) or the decay width of the distribution and K a constant.
+
+
+The Breit-Wigner distribution can also be expressed in the following form where the constant K is written open.
+
+
+The decay width Gamma and the lifetime tau of the particle detected in the resonance are related in the following way:
+
+Gamma = h/2pi*tau
+
+
+'''
 
 import pandas as pd
 import numpy as np
@@ -74,17 +90,38 @@ plt.xlabel('Invariant mass [GeV]')
 plt.ylabel('Number of event')
 plt.title('The Breit-Wigner fit')
 plt.legend()
-plt.show()
+#plt.show()
+
+'''Question 5 - Calculate the lifetime tau of the Z boson with the uncertainty by using the fit. Compare the calculated value to known the lifetime of the Z, What do you notice? What could possibly explain your observations?'''
+
 
 # Planck constant in eV.s
 h_c = 6.5821*math.pow(10,-25)
 
-# lifetime of the Z boson is seconds
+# Decay Width in GeV http://pdg.lbl.gov/2020/listings/rpp2020-list-z-boson.pdf
+Gamma_Z = 2.4952
+err_Gamma_Z = 0.0023
+
+# Calculating the lifetime of Z
+tau_Z = h_c/Gamma_Z
+
+err_tau_Z = tau_Z*(err_Gamma_Z/Gamma_Z)
+
+# lifetime of the Z boson is seconds using the PDG decay width value
+print ("The lifetime of the Z boson, using the decay width = {} +- {}".format(tau_Z,err_tau_Z))
+
+#===========================================================================================================
+
+# Calculating the lifetime of Z using fit results
 tau = h_c/best[0]
 # Obtaining the error from the error propagation
 error_tau = tau*(error[0]/best[0])
 
-# tau + error_tau
+
+
+# lifetime of the Z boson is seconds using the fit results
 print ("The lifetime of the Z boson is given by tau = {} +- {}".format(tau,error_tau))
 
 
+
+''' The difference in Z lifetime value is because the origin of its decay width value, since the difference between the two values are way more than 2 sigma. The origin of this problem can be associated to the determination of the boson Z decay width, since those two quantities are related by a constant. The decay width value obtained as a fit result is not compatible with the expected value as we can see in PDG.   '''
